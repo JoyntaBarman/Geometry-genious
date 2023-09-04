@@ -15,7 +15,7 @@ function setElementTextById(elementId, value) {
   if (isNaN(value)) {
     element.innerText = '00.00';
   } else {
-    element.innerText = value;
+    element.innerText = value.toFixed(2);
   }
 }
 
@@ -28,7 +28,7 @@ function converterToMeter(shape, shapeArea) {
     const childCount = converterDiv.childElementCount;
 
     const nodeHtml = `<p>${childCount + 1}. ${shape}</p>
-  <p>${shapeArea / 10000}  m<sup>2</sup></p>`;
+  <p>${(shapeArea / 10000).toFixed(2)}  m<sup>2</sup></p>`;
     node.classList.add('flex', 'justify-between', 'mx-3');
 
     node.innerHTML = nodeHtml;
@@ -59,10 +59,17 @@ parallelogram.addEventListener('click', (event) => {
   const Area = getInputById('pBase') * getInputById('pHight');
   setElementTextById('pArea', Area);
   converterToMeter('Parallelogram', Area);
-
 });
 
 // parallelogram shape
+const rhombus = document.getElementById('rhombusBtn');
+rhombus.addEventListener('click', (event) => {
+  const Area = getInputById('rd1') * getInputById('rd2');
+  setElementTextById('rhArea', Area);
+  converterToMeter('Rhombus', Area);
+});
+
+// pentagon shape
 const pentagon = document.getElementById('pentagonBtn');
 pentagon.addEventListener('click', (event) => {
   const Area = getInputById('peBase') * getInputById('peHight') * 0.5;
@@ -70,7 +77,7 @@ pentagon.addEventListener('click', (event) => {
   converterToMeter('Pentagon', Area);
 });
 
-// parallelogram shape
+// ellipse shape
 const ellipse = document.getElementById('ellipseBtn');
 ellipse.addEventListener('click', (event) => {
   const Area = getInputById('eRedious') * getInputById('eRedious') * Math.PI;
